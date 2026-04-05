@@ -78,7 +78,7 @@ export function Frakinator() {
       <Card className="border-border/50 bg-card/80 backdrop-blur">
         <CardHeader className="border-b border-border/50 pb-4">
           <CardTitle className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Stats Leader
+            Létalité %
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-6">

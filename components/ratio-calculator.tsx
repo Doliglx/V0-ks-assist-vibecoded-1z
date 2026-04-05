@@ -15,6 +15,15 @@ export function RatioCalculator() {
     arc: 30,
   })
 
+  const presetRatios = [
+    { label: "50/20/30", inf: 50, cav: 20, arc: 30 },
+    { label: "50/25/25", inf: 50, cav: 25, arc: 25 },
+    { label: "45/20/35", inf: 45, cav: 20, arc: 35 },
+    { label: "10/10/80", inf: 10, cav: 10, arc: 80 },
+    { label: "60/20/20", inf: 60, cav: 20, arc: 20 },
+    { label: "60/40/0", inf: 60, cav: 40, arc: 0 },
+  ]
+
   const results = useMemo(() => {
     const inf = Math.floor((total * percentages.inf) / 100)
     const cav = Math.floor((total * percentages.cav) / 100)
@@ -44,6 +53,37 @@ export function RatioCalculator() {
               onChange={(e) => setTotal(parseInt(e.target.value) || 0)}
               className="border-border/50 bg-input font-mono text-xl"
             />
+          </div>
+
+          <div className="mb-6 space-y-2">
+            <Label className="text-xs text-muted-foreground">
+              Ratios Prédéfinis (INF/CAV/ARC)
+            </Label>
+            <div className="flex flex-wrap gap-2">
+              {presetRatios.map((preset) => (
+                <Button
+                  key={preset.label}
+                  variant={
+                    percentages.inf === preset.inf &&
+                    percentages.cav === preset.cav &&
+                    percentages.arc === preset.arc
+                      ? "default"
+                      : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    setPercentages({
+                      inf: preset.inf,
+                      cav: preset.cav,
+                      arc: preset.arc,
+                    })
+                  }
+                  className="font-mono text-xs"
+                >
+                  {preset.label}
+                </Button>
+              ))}
+            </div>
           </div>
 
           <div className="mb-6 grid gap-4 sm:grid-cols-3">
