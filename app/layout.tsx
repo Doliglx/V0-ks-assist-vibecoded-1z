@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'KINGSHOT - Hub Tactique Pro',
+  title: 'KingShot Assistant - #Doliprane - GLX',
   description: 'Outils tactiques professionnels pour optimiser vos ressources et stratégies',
   generator: 'v0.app',
   icons: {

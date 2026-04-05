@@ -77,7 +77,7 @@ export default function KingshotHub() {
         {/* Footer */}
         <footer className="mt-12 border-t border-border/30 pt-6 text-center">
           <p className="text-xs text-muted-foreground">
-            KINGSHOT Hub Tactique Pro
+            KingShot Assistant - #Doliprane - GLX
           </p>
         </footer>
       </div>
