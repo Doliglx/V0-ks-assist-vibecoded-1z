@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
+import { PieChart, Pie, Cell, Tooltip } from "recharts"
 import { Scale, Wheat, TreePine, Mountain, Hammer } from "lucide-react"
 
 const RSS_DATA = {
@@ -31,6 +31,11 @@ export function ResourceCalculator() {
   })
 
   const [mode, setMode] = useState<ResourceMode>("balance")
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const results = useMemo(() => {
     const q = [quantities.q1, quantities.q2, quantities.q3]
@@ -206,9 +211,9 @@ export function ResourceCalculator() {
             </p>
           </div>
 
-          <div className="mt-6 h-[180px] w-full">
-            <ResponsiveContainer width="100%" height={180} minWidth={100}>
-              <PieChart>
+          <div className="mt-6 flex h-[180px] items-center justify-center">
+            {mounted && chartData.length > 0 ? (
+              <PieChart width={200} height={180}>
                 <Pie
                   data={chartData}
                   cx="50%"
@@ -231,7 +236,9 @@ export function ResourceCalculator() {
                   }}
                 />
               </PieChart>
-            </ResponsiveContainer>
+            ) : (
+              <div className="text-sm text-muted-foreground">Chargement...</div>
+            )}
           </div>
         </CardContent>
       </Card>

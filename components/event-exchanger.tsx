@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
+import { PieChart, Pie, Cell, Tooltip } from "recharts"
 import { Eye, ScrollText, Hammer, BookOpen, Map, Gem, Package } from "lucide-react"
 
 const RESOURCES = [
@@ -33,6 +33,12 @@ export function EventExchanger() {
       {}
     )
   )
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const updateResource = (id: string, field: keyof ResourceState, value: number) => {
     setResources((prev) => ({
@@ -162,37 +168,35 @@ export function EventExchanger() {
             </p>
           </div>
 
-          <div className="h-[250px] w-full">
-            {chartData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={250} minWidth={100}>
-                <PieChart>
-                  <Pie
-                    data={chartData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={50}
-                    outerRadius={90}
-                    dataKey="value"
-                    stroke="none"
-                  >
-                    {chartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value: number) =>
-                      `${value.toLocaleString("fr-FR")} jetons`
-                    }
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+          <div className="flex h-[250px] items-center justify-center">
+            {mounted && chartData.length > 0 ? (
+              <PieChart width={220} height={220}>
+                <Pie
+                  data={chartData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={90}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  formatter={(value: number) =>
+                    `${value.toLocaleString("fr-FR")} jetons`
+                  }
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "8px",
+                  }}
+                />
+              </PieChart>
             ) : (
-              <div className="flex h-full items-center justify-center text-muted-foreground">
+              <div className="text-muted-foreground">
                 Entrez des valeurs pour voir le graphique
               </div>
             )}

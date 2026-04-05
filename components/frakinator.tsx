@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -12,16 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-  Area,
-  AreaChart,
-} from "recharts"
+import { XAxis, YAxis, Tooltip, Area, AreaChart } from "recharts"
 import { Rocket, Shield, Swords, Target } from "lucide-react"
 
 export function Frakinator() {
@@ -35,6 +26,11 @@ export function Frakinator() {
   })
   const [tierBonus, setTierBonus] = useState("1.1")
   const [calculated, setCalculated] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const { best, chartPoints } = useMemo(() => {
     const getMultiplier = (attack: number, leader: number) =>
@@ -248,46 +244,44 @@ export function Frakinator() {
             )}
           </div>
 
-          <div className="h-[200px] w-full">
-            {calculated && chartPoints.length > 0 ? (
-              <ResponsiveContainer width="100%" height={200} minWidth={100}>
-                <AreaChart data={chartPoints}>
-                  <defs>
-                    <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#ff6b35" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#ff6b35" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis
-                    dataKey="x"
-                    tick={{ fill: "#6b7280", fontSize: 10 }}
-                    tickFormatter={(v) => `${v}%`}
-                    axisLine={{ stroke: "#374151" }}
-                  />
-                  <YAxis
-                    tick={{ fill: "#6b7280", fontSize: 10 }}
-                    axisLine={{ stroke: "#374151" }}
-                  />
-                  <Tooltip
-                    formatter={(value: number) => value.toFixed(3)}
-                    labelFormatter={(label) => `Arc: ${label}%`}
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="y"
-                    stroke="#ff6b35"
-                    strokeWidth={2}
-                    fill="url(#colorScore)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
+          <div className="flex h-[200px] items-center justify-center">
+            {mounted && calculated && chartPoints.length > 0 ? (
+              <AreaChart width={320} height={200} data={chartPoints}>
+                <defs>
+                  <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#ff6b35" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#ff6b35" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis
+                  dataKey="x"
+                  tick={{ fill: "#6b7280", fontSize: 10 }}
+                  tickFormatter={(v) => `${v}%`}
+                  axisLine={{ stroke: "#374151" }}
+                />
+                <YAxis
+                  tick={{ fill: "#6b7280", fontSize: 10 }}
+                  axisLine={{ stroke: "#374151" }}
+                />
+                <Tooltip
+                  formatter={(value: number) => value.toFixed(3)}
+                  labelFormatter={(label) => `Arc: ${label}%`}
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="y"
+                  stroke="#ff6b35"
+                  strokeWidth={2}
+                  fill="url(#colorScore)"
+                />
+              </AreaChart>
             ) : (
-              <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+              <div className="text-sm text-muted-foreground">
                 Les résultats apparaîtront ici
               </div>
             )}
