@@ -74,7 +74,7 @@ export function Frakinator() {
       <Card className="border-border/50 bg-card/80 backdrop-blur">
         <CardHeader className="border-b border-border/50 pb-4">
           <CardTitle className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Létalité %
+            Statistiques Leader :
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-6">
@@ -99,7 +99,7 @@ export function Frakinator() {
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-xs text-muted-foreground">Leader %</Label>
+                <Label className="text-xs text-muted-foreground">Létalité %</Label>
                 <Input
                   type="number"
                   value={stats.leaderInf}
@@ -134,7 +134,7 @@ export function Frakinator() {
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-xs text-muted-foreground">Leader %</Label>
+                <Label className="text-xs text-muted-foreground">Létalité %</Label>
                 <Input
                   type="number"
                   value={stats.leaderCav}
@@ -169,7 +169,7 @@ export function Frakinator() {
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-xs text-muted-foreground">Leader %</Label>
+                <Label className="text-xs text-muted-foreground">Létalité %</Label>
                 <Input
                   type="number"
                   value={stats.leaderArc}
