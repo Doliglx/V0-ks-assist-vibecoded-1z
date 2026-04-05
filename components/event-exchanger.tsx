@@ -162,9 +162,9 @@ export function EventExchanger() {
             </p>
           </div>
 
-          <div className="h-[250px]">
+          <div className="h-[250px] w-full">
             {chartData.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height={250} minWidth={100}>
                 <PieChart>
                   <Pie
                     data={chartData}

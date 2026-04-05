@@ -206,8 +206,8 @@ export function ResourceCalculator() {
             </p>
           </div>
 
-          <div className="mt-6 h-[180px]">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="mt-6 h-[180px] w-full">
+            <ResponsiveContainer width="100%" height={180} minWidth={100}>
               <PieChart>
                 <Pie
                   data={chartData}
