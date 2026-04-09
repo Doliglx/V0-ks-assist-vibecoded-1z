@@ -100,8 +100,8 @@ export function ResourceCalculator() {
                 <Image
                   src="/images/chest-level1.png"
                   alt="Coffre de ressources niveau 1"
-                  width={56}
-                  height={56}
+                  width={48}
+                  height={48}
                   className="rounded-lg"
                 />
               </div>
@@ -122,8 +122,8 @@ export function ResourceCalculator() {
                 <Image
                   src="/images/chest-level2.png"
                   alt="Coffre de ressources niveau 2"
-                  width={56}
-                  height={56}
+                  width={48}
+                  height={48}
                   className="rounded-lg"
                 />
               </div>
