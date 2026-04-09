@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { PieChart, Pie, Cell, Tooltip } from "recharts"
 import { Scale, Wheat, TreePine, Mountain, Hammer } from "lucide-react"
+import Image from "next/image"
 
 const RSS_DATA = {
   n1: { bread: 10000, wood: 10000, stone: 2000, iron: 500 },
@@ -77,9 +78,18 @@ export function ResourceCalculator() {
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       <Card className="border-border/50 bg-card/80 backdrop-blur">
         <CardHeader className="border-b border-border/50 pb-4">
-          <CardTitle className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Inventaire
-          </CardTitle>
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/chest-level3.png"
+              alt="Coffre de ressources niveau 3"
+              width={64}
+              height={64}
+              className="rounded-lg"
+            />
+            <CardTitle className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Inventaire
+            </CardTitle>
+          </div>
         </CardHeader>
         <CardContent className="pt-6">
           <div className="mb-6 grid grid-cols-3 gap-4">
