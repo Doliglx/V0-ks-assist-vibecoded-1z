@@ -78,18 +78,9 @@ export function ResourceCalculator() {
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       <Card className="border-border/50 bg-card/80 backdrop-blur">
         <CardHeader className="border-b border-border/50 pb-4">
-          <div className="flex items-center gap-4">
-            <Image
-              src="/images/chest-level3.png"
-              alt="Coffre de ressources niveau 3"
-              width={64}
-              height={64}
-              className="rounded-lg"
-            />
-            <CardTitle className="text-xs font-semibold uppercase tracking-wider text-primary">
-              Inventaire
-            </CardTitle>
-          </div>
+          <CardTitle className="text-xs font-semibold uppercase tracking-wider text-primary">
+            Inventaire
+          </CardTitle>
         </CardHeader>
         <CardContent className="pt-6">
           <div className="mb-6 grid grid-cols-3 gap-4">
@@ -131,6 +122,15 @@ export function ResourceCalculator() {
                 }
                 className="border-border/50 bg-input font-mono text-lg"
               />
+              <div className="flex justify-center pt-2">
+                <Image
+                  src="/images/chest-level3.png"
+                  alt="Coffre de ressources niveau 3"
+                  width={48}
+                  height={48}
+                  className="rounded-lg"
+                />
+              </div>
             </div>
           </div>
 
