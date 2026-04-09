@@ -118,6 +118,15 @@ export function ResourceCalculator() {
                 }
                 className="border-border/50 bg-input font-mono text-lg"
               />
+              <div className="flex justify-center pt-2">
+                <Image
+                  src="/images/chest-level2.png"
+                  alt="Coffre de ressources niveau 2"
+                  width={48}
+                  height={48}
+                  className="rounded-lg"
+                />
+              </div>
             </div>
             <div className="space-y-2">
               <Label className="text-xs uppercase text-muted-foreground">
