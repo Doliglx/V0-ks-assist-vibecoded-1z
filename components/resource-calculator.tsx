@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { PieChart, Pie, Cell, Tooltip } from "recharts"
-import { Scale, Wheat, TreePine, Mountain, Hammer } from "lucide-react"
+import { Scale, Wheat, TreePine, Mountain, Hammer, Info } from "lucide-react"
 import Image from "next/image"
 
 const RSS_DATA = {
