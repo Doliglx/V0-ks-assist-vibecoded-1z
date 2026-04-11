@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { PieChart, Pie, Cell, Tooltip } from "recharts"
-import { Scale, Wheat, TreePine, Mountain, Hammer } from "lucide-react"
+import { Scale, Wheat, TreePine, Mountain, Hammer, Info } from "lucide-react"
+import Image from "next/image"
 
 const RSS_DATA = {
   n1: { bread: 10000, wood: 10000, stone: 2000, iron: 500 },
@@ -83,7 +84,7 @@ export function ResourceCalculator() {
         </CardHeader>
         <CardContent className="pt-6">
           <div className="mb-6 grid grid-cols-3 gap-4">
-            <div className="space-y-2">
+            <div className="space-y-2 text-center">
               <Label className="text-xs uppercase text-muted-foreground">
                 Niveau 1
               </Label>
@@ -93,10 +94,19 @@ export function ResourceCalculator() {
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q1: parseInt(e.target.value) || 0 }))
                 }
-                className="border-border/50 bg-input font-mono text-lg"
+                className="border-border/50 bg-input font-mono text-lg text-center"
               />
+              <div className="flex justify-center pt-2">
+                <Image
+                  src="/images/chest-level1.png"
+                  alt="Coffre de ressources niveau 1"
+                  width={48}
+                  height={48}
+                  className="rounded-lg"
+                />
+              </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 text-center">
               <Label className="text-xs uppercase text-muted-foreground">
                 Niveau 2
               </Label>
@@ -106,10 +116,19 @@ export function ResourceCalculator() {
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q2: parseInt(e.target.value) || 0 }))
                 }
-                className="border-border/50 bg-input font-mono text-lg"
+                className="border-border/50 bg-input font-mono text-lg text-center"
               />
+              <div className="flex justify-center pt-2">
+                <Image
+                  src="/images/chest-level2.png"
+                  alt="Coffre de ressources niveau 2"
+                  width={48}
+                  height={48}
+                  className="rounded-lg"
+                />
+              </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 text-center">
               <Label className="text-xs uppercase text-muted-foreground">
                 Niveau 3
               </Label>
@@ -119,8 +138,17 @@ export function ResourceCalculator() {
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q3: parseInt(e.target.value) || 0 }))
                 }
-                className="border-border/50 bg-input font-mono text-lg"
+                className="border-border/50 bg-input font-mono text-lg text-center"
               />
+              <div className="flex justify-center pt-2">
+                <Image
+                  src="/images/chest-level3.png"
+                  alt="Coffre de ressources niveau 3"
+                  width={56}
+                  height={56}
+                  className="rounded-lg"
+                />
+              </div>
             </div>
           </div>
 
