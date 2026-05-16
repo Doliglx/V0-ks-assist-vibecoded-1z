@@ -6,13 +6,15 @@ import { ResourceCalculator } from "@/components/resource-calculator"
 import { EventExchanger } from "@/components/event-exchanger"
 import { Frakinator } from "@/components/frakinator"
 import { RatioCalculator } from "@/components/ratio-calculator"
-import { Package, Sparkles, Swords, Target } from "lucide-react"
+import { BuffDebuffCalculator } from "@/components/buff-debuff-calculator"
+import { Package, Sparkles, Swords, Target, TrendingUp } from "lucide-react"
 
 const TABS = [
   { id: "rss", label: "Coffres RSS", icon: Package },
   { id: "event", label: "Événements", icon: Sparkles },
   { id: "fraki", label: "Frakinator", icon: Swords },
   { id: "ratio", label: "Ratio Marche", icon: Target },
+  { id: "buff", label: "Buff/Debuff", icon: TrendingUp },
 ] as const
 
 type TabId = (typeof TABS)[number]["id"]
@@ -56,6 +58,7 @@ export default function KingshotHub() {
             {activeTab === "event" && "Échangeur Pro"}
             {activeTab === "fraki" && "Frakinator System"}
             {activeTab === "ratio" && "Ratio de Marche"}
+            {activeTab === "buff" && "Calculateur Buff/Debuff"}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {activeTab === "rss" && "Optimisez vos coffres de ressources"}
@@ -63,6 +66,7 @@ export default function KingshotHub() {
             {activeTab === "fraki" &&
               "Trouvez la composition optimale de troupes"}
             {activeTab === "ratio" && "Répartissez vos troupes efficacement"}
+            {activeTab === "buff" && "Calculez vos statistiques après modificateur"}
           </p>
         </header>
 
@@ -72,6 +76,7 @@ export default function KingshotHub() {
           {activeTab === "event" && <EventExchanger />}
           {activeTab === "fraki" && <Frakinator />}
           {activeTab === "ratio" && <RatioCalculator />}
+          {activeTab === "buff" && <BuffDebuffCalculator />}
         </main>
 
         {/* Footer */}
