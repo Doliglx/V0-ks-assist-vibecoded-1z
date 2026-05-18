@@ -17,12 +17,12 @@ import { Rocket, Shield, Swords, Target } from "lucide-react"
 
 export function Frakinator() {
   const [stats, setStats] = useState({
-    attackInf: 609,
-    leaderInf: 498,
-    attackCav: 530,
-    leaderCav: 450,
-    attackArc: 574,
-    leaderArc: 529,
+    attackInf: 0,
+    leaderInf: 0,
+    attackCav: 0,
+    leaderCav: 0,
+    attackArc: 0,
+    leaderArc: 0,
   })
   const [tierBonus, setTierBonus] = useState("1.1")
   const [calculated, setCalculated] = useState(false)
@@ -88,7 +88,7 @@ export function Frakinator() {
                 <Label className="text-xs text-muted-foreground">Attaque %</Label>
                 <Input
                   type="number"
-                  value={stats.attackInf}
+                  value={stats.attackInf || ""}
                   onChange={(e) =>
                     setStats((p) => ({
                       ...p,
@@ -96,13 +96,14 @@ export function Frakinator() {
                     }))
                   }
                   className="border-border/50 bg-input font-mono"
+                  placeholder="0"
                 />
               </div>
               <div className="space-y-2">
                 <Label className="text-xs text-muted-foreground">Létalité %</Label>
                 <Input
                   type="number"
-                  value={stats.leaderInf}
+                  value={stats.leaderInf || ""}
                   onChange={(e) =>
                     setStats((p) => ({
                       ...p,
@@ -110,6 +111,7 @@ export function Frakinator() {
                     }))
                   }
                   className="border-border/50 bg-input font-mono"
+                  placeholder="0"
                 />
               </div>
             </div>
@@ -123,7 +125,7 @@ export function Frakinator() {
                 <Label className="text-xs text-muted-foreground">Attaque %</Label>
                 <Input
                   type="number"
-                  value={stats.attackCav}
+                  value={stats.attackCav || ""}
                   onChange={(e) =>
                     setStats((p) => ({
                       ...p,
@@ -131,13 +133,14 @@ export function Frakinator() {
                     }))
                   }
                   className="border-border/50 bg-input font-mono"
+                  placeholder="0"
                 />
               </div>
               <div className="space-y-2">
                 <Label className="text-xs text-muted-foreground">Létalité %</Label>
                 <Input
                   type="number"
-                  value={stats.leaderCav}
+                  value={stats.leaderCav || ""}
                   onChange={(e) =>
                     setStats((p) => ({
                       ...p,
@@ -145,6 +148,7 @@ export function Frakinator() {
                     }))
                   }
                   className="border-border/50 bg-input font-mono"
+                  placeholder="0"
                 />
               </div>
             </div>
@@ -158,7 +162,7 @@ export function Frakinator() {
                 <Label className="text-xs text-muted-foreground">Attaque %</Label>
                 <Input
                   type="number"
-                  value={stats.attackArc}
+                  value={stats.attackArc || ""}
                   onChange={(e) =>
                     setStats((p) => ({
                       ...p,
@@ -166,13 +170,14 @@ export function Frakinator() {
                     }))
                   }
                   className="border-border/50 bg-input font-mono"
+                  placeholder="0"
                 />
               </div>
               <div className="space-y-2">
                 <Label className="text-xs text-muted-foreground">Létalité %</Label>
                 <Input
                   type="number"
-                  value={stats.leaderArc}
+                  value={stats.leaderArc || ""}
                   onChange={(e) =>
                     setStats((p) => ({
                       ...p,
@@ -180,6 +185,7 @@ export function Frakinator() {
                     }))
                   }
                   className="border-border/50 bg-input font-mono"
+                  placeholder="0"
                 />
               </div>
             </div>
