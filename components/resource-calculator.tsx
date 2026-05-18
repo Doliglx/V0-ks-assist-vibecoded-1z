@@ -84,72 +84,69 @@ export function ResourceCalculator() {
         </CardHeader>
         <CardContent className="pt-6">
           <div className="mb-6 grid grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="relative h-16 w-16 flex-shrink-0">
                 <Image
-                  src="/images/chest-n1.jpg"
+                  src="/images/chest-n1.png"
                   alt="Coffre Niveau 1"
-                  width={40}
-                  height={40}
-                  className="rounded-lg"
+                  fill
+                  className="rounded-lg object-contain"
                 />
-                <Label className="text-xs uppercase text-muted-foreground">
-                  Niveau 1
-                </Label>
               </div>
+              <Label className="text-xs uppercase text-muted-foreground">
+                Niveau 1
+              </Label>
               <Input
                 type="number"
                 value={quantities.q1 || ""}
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q1: parseInt(e.target.value) || 0 }))
                 }
-                className="border-border/50 bg-input font-mono text-lg"
+                className="border-border/50 bg-input font-mono text-lg text-center"
                 placeholder="0"
               />
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="relative h-16 w-16 flex-shrink-0">
                 <Image
-                  src="/images/chest-n2.jpg"
+                  src="/images/chest-n2.png"
                   alt="Coffre Niveau 2"
-                  width={40}
-                  height={40}
-                  className="rounded-lg"
+                  fill
+                  className="rounded-lg object-contain"
                 />
-                <Label className="text-xs uppercase text-muted-foreground">
-                  Niveau 2
-                </Label>
               </div>
+              <Label className="text-xs uppercase text-muted-foreground">
+                Niveau 2
+              </Label>
               <Input
                 type="number"
                 value={quantities.q2 || ""}
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q2: parseInt(e.target.value) || 0 }))
                 }
-                className="border-border/50 bg-input font-mono text-lg"
+                className="border-border/50 bg-input font-mono text-lg text-center"
                 placeholder="0"
               />
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="relative h-16 w-16 flex-shrink-0">
                 <Image
-                  src="/images/chest-n3.jpg"
+                  src="/images/chest-n3.png"
                   alt="Coffre Niveau 3"
-                  width={40}
-                  height={40}
-                  className="rounded-lg"
+                  fill
+                  className="rounded-lg object-contain"
                 />
-                <Label className="text-xs uppercase text-muted-foreground">
-                  Niveau 3
-                </Label>
               </div>
+              <Label className="text-xs uppercase text-muted-foreground">
+                Niveau 3
+              </Label>
               <Input
                 type="number"
                 value={quantities.q3 || ""}
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q3: parseInt(e.target.value) || 0 }))
                 }
-                className="border-border/50 bg-input font-mono text-lg"
+                className="border-border/50 bg-input font-mono text-lg text-center"
                 placeholder="0"
               />
             </div>
