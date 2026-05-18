@@ -7,7 +7,8 @@ import { EventExchanger } from "@/components/event-exchanger"
 import { Frakinator } from "@/components/frakinator"
 import { RatioCalculator } from "@/components/ratio-calculator"
 import { BuffDebuffCalculator } from "@/components/buff-debuff-calculator"
-import { Package, Sparkles, Swords, Target, TrendingUp } from "lucide-react"
+import { GiftCodeRedeemer } from "@/components/gift-code-redeemer"
+import { Package, Sparkles, Swords, Target, TrendingUp, Gift } from "lucide-react"
 
 const TABS = [
   { id: "rss", label: "Coffres RSS", icon: Package },
@@ -15,6 +16,7 @@ const TABS = [
   { id: "fraki", label: "Frakinator", icon: Swords },
   { id: "ratio", label: "Ratio Marche", icon: Target },
   { id: "buff", label: "Buff/Debuff", icon: TrendingUp },
+  { id: "giftcode", label: "Codes Cadeaux", icon: Gift },
 ] as const
 
 type TabId = (typeof TABS)[number]["id"]
@@ -59,6 +61,7 @@ export default function KingshotHub() {
             {activeTab === "fraki" && "Frakinator System"}
             {activeTab === "ratio" && "Ratio de Marche"}
             {activeTab === "buff" && "Calculateur Buff/Debuff"}
+            {activeTab === "giftcode" && "Codes Cadeaux"}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {activeTab === "rss" && "Optimisez vos coffres de ressources"}
@@ -67,6 +70,7 @@ export default function KingshotHub() {
               "Trouvez la composition optimale de troupes"}
             {activeTab === "ratio" && "Répartissez vos troupes efficacement"}
             {activeTab === "buff" && "Calculez vos statistiques après modificateur"}
+            {activeTab === "giftcode" && "Récupérez vos récompenses automatiquement"}
           </p>
         </header>
 
@@ -77,6 +81,7 @@ export default function KingshotHub() {
           {activeTab === "fraki" && <Frakinator />}
           {activeTab === "ratio" && <RatioCalculator />}
           {activeTab === "buff" && <BuffDebuffCalculator />}
+          {activeTab === "giftcode" && <GiftCodeRedeemer />}
         </main>
 
         {/* Footer */}
