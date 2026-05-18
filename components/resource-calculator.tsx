@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { PieChart, Pie, Cell, Tooltip } from "recharts"
 import { Scale, Wheat, TreePine, Mountain, Hammer } from "lucide-react"
+import Image from "next/image"
 
 const RSS_DATA = {
   n1: { bread: 10000, wood: 10000, stone: 2000, iron: 500 },
@@ -25,9 +26,9 @@ type ResourceMode = "balance" | "bread" | "wood" | "stone" | "iron"
 
 export function ResourceCalculator() {
   const [quantities, setQuantities] = useState({
-    q1: 25537,
-    q2: 37895,
-    q3: 1304,
+    q1: 0,
+    q2: 0,
+    q3: 0,
   })
 
   const [mode, setMode] = useState<ResourceMode>("balance")
@@ -84,42 +85,72 @@ export function ResourceCalculator() {
         <CardContent className="pt-6">
           <div className="mb-6 grid grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label className="text-xs uppercase text-muted-foreground">
-                Niveau 1
-              </Label>
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/images/chest-n1.jpg"
+                  alt="Coffre Niveau 1"
+                  width={40}
+                  height={40}
+                  className="rounded-lg"
+                />
+                <Label className="text-xs uppercase text-muted-foreground">
+                  Niveau 1
+                </Label>
+              </div>
               <Input
                 type="number"
-                value={quantities.q1}
+                value={quantities.q1 || ""}
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q1: parseInt(e.target.value) || 0 }))
                 }
                 className="border-border/50 bg-input font-mono text-lg"
+                placeholder="0"
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-xs uppercase text-muted-foreground">
-                Niveau 2
-              </Label>
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/images/chest-n2.jpg"
+                  alt="Coffre Niveau 2"
+                  width={40}
+                  height={40}
+                  className="rounded-lg"
+                />
+                <Label className="text-xs uppercase text-muted-foreground">
+                  Niveau 2
+                </Label>
+              </div>
               <Input
                 type="number"
-                value={quantities.q2}
+                value={quantities.q2 || ""}
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q2: parseInt(e.target.value) || 0 }))
                 }
                 className="border-border/50 bg-input font-mono text-lg"
+                placeholder="0"
               />
             </div>
             <div className="space-y-2">
-              <Label className="text-xs uppercase text-muted-foreground">
-                Niveau 3
-              </Label>
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/images/chest-n3.jpg"
+                  alt="Coffre Niveau 3"
+                  width={40}
+                  height={40}
+                  className="rounded-lg"
+                />
+                <Label className="text-xs uppercase text-muted-foreground">
+                  Niveau 3
+                </Label>
+              </div>
               <Input
                 type="number"
-                value={quantities.q3}
+                value={quantities.q3 || ""}
                 onChange={(e) =>
                   setQuantities((p) => ({ ...p, q3: parseInt(e.target.value) || 0 }))
                 }
                 className="border-border/50 bg-input font-mono text-lg"
+                placeholder="0"
               />
             </div>
           </div>

@@ -14,9 +14,9 @@ import {
 import { TrendingUp, TrendingDown, Percent, Calculator } from "lucide-react"
 
 export function BuffDebuffCalculator() {
-  const [initialStat, setInitialStat] = useState(465.2)
+  const [initialStat, setInitialStat] = useState(0)
   const [modType, setModType] = useState<"buff" | "debuff">("buff")
-  const [modValue, setModValue] = useState(7.5)
+  const [modValue, setModValue] = useState(0)
 
   const results = useMemo(() => {
     let m = modValue
@@ -63,9 +63,10 @@ export function BuffDebuffCalculator() {
             <Input
               type="number"
               step="0.1"
-              value={initialStat}
+              value={initialStat || ""}
               onChange={(e) => setInitialStat(parseFloat(e.target.value) || 0)}
               className="border-border/50 bg-input font-mono text-xl"
+              placeholder="0"
             />
           </div>
 
@@ -110,9 +111,10 @@ export function BuffDebuffCalculator() {
             <Input
               type="number"
               step="0.1"
-              value={modValue}
+              value={modValue || ""}
               onChange={(e) => setModValue(parseFloat(e.target.value) || 0)}
               className="border-border/50 bg-input font-mono text-xl"
+              placeholder="0"
             />
           </div>
 
