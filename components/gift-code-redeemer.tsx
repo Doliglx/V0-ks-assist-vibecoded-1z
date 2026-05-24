@@ -18,9 +18,7 @@ import {
   AlertCircle,
   Loader2,
   Trash2,
-  Gauge,
 } from "lucide-react"
-import { Slider } from "@/components/ui/slider"
 import { cn } from "@/lib/utils"
 
 const ALLIANCE_MLF = [
