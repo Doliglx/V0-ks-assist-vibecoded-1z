@@ -8,8 +8,7 @@ import { Frakinator } from "@/components/frakinator"
 import { RatioCalculator } from "@/components/ratio-calculator"
 import { BuffDebuffCalculator } from "@/components/buff-debuff-calculator"
 import { GiftCodeRedeemer } from "@/components/gift-code-redeemer"
-import { LocationFinder } from "@/components/location-finder"
-import { Package, Sparkles, Swords, Target, TrendingUp, Gift, MapPin } from "lucide-react"
+import { Package, Sparkles, Swords, Target, TrendingUp, Gift } from "lucide-react"
 
 const TABS = [
   { id: "rss", label: "Coffres RSS", icon: Package },
@@ -18,7 +17,6 @@ const TABS = [
   { id: "ratio", label: "Ratio Marche", icon: Target },
   { id: "buff", label: "Buff/Debuff", icon: TrendingUp },
   { id: "giftcode", label: "Codes Cadeaux", icon: Gift },
-  { id: "locate", label: "Location Finder", icon: MapPin },
 ] as const
 
 type TabId = (typeof TABS)[number]["id"]
@@ -64,7 +62,6 @@ export default function KingshotHub() {
             {activeTab === "ratio" && "Ratio de Marche"}
             {activeTab === "buff" && "Calculateur Buff/Debuff"}
             {activeTab === "giftcode" && "Codes Cadeaux"}
-            {activeTab === "locate" && "Location Finder"}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
             {activeTab === "rss" && "Optimisez vos coffres de ressources"}
@@ -74,7 +71,6 @@ export default function KingshotHub() {
             {activeTab === "ratio" && "Répartissez vos troupes efficacement"}
             {activeTab === "buff" && "Calculez vos statistiques après modificateur"}
             {activeTab === "giftcode" && "Récupérez vos récompenses automatiquement"}
-            {activeTab === "locate" && "Trackez n'importe quel joueur sur la map"}
           </p>
         </header>
 
@@ -86,7 +82,6 @@ export default function KingshotHub() {
           {activeTab === "ratio" && <RatioCalculator />}
           {activeTab === "buff" && <BuffDebuffCalculator />}
           {activeTab === "giftcode" && <GiftCodeRedeemer />}
-          {activeTab === "locate" && <LocationFinder />}
         </main>
 
         {/* Footer */}
