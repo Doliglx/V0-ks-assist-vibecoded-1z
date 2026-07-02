@@ -18,6 +18,7 @@ import {
   AlertCircle,
   Loader2,
   Trash2,
+  Gauge,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -59,6 +60,39 @@ interface RedeemResult {
 
 type AllianceMode = "manual" | "mlf" | "mmf"
 
+const SPEED_PRESETS = [
+  {
+    id: "turbo",
+    label: "Turbo",
+    delay: 150,
+    retries: 2,
+    description: "Le plus rapide (risque de limite API)",
+  },
+  {
+    id: "fast",
+    label: "Rapide",
+    delay: 350,
+    retries: 3,
+    description: "Bon compromis vitesse / fiabilité",
+  },
+  {
+    id: "normal",
+    label: "Normal",
+    delay: 700,
+    retries: 3,
+    description: "Vitesse par défaut recommandée",
+  },
+  {
+    id: "safe",
+    label: "Sécurisé",
+    delay: 1500,
+    retries: 4,
+    description: "Le plus fiable, évite les blocages",
+  },
+] as const
+
+type SpeedId = (typeof SPEED_PRESETS)[number]["id"]
+
 export function GiftCodeRedeemer() {
   const [giftCode, setGiftCode] = useState("")
   const [manualIds, setManualIds] = useState("")
@@ -66,7 +100,14 @@ export function GiftCodeRedeemer() {
   const [isRunning, setIsRunning] = useState(false)
   const [results, setResults] = useState<RedeemResult[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [speedId, setSpeedId] = useState<SpeedId>("normal")
+  const [customDelay, setCustomDelay] = useState<number | null>(null)
   const abortRef = useRef(false)
+
+  const activeSpeed =
+    SPEED_PRESETS.find((s) => s.id === speedId) ?? SPEED_PRESETS[2]
+  const effectiveDelay =
+    customDelay !== null && customDelay >= 0 ? customDelay : activeSpeed.delay
 
   const getPlayerIds = useCallback((): string[] => {
     switch (mode) {
@@ -86,7 +127,7 @@ export function GiftCodeRedeemer() {
   const redeemForPlayer = async (
     playerId: string,
     code: string,
-    retries = 3
+    retries = activeSpeed.retries
   ): Promise<RedeemResult> => {
     for (let attempt = 0; attempt < retries; attempt++) {
       try {
@@ -164,9 +205,9 @@ export function GiftCodeRedeemer() {
         prev.map((r, idx) => (idx === i ? result : r))
       )
 
-      // Small delay between requests
-      if (i < playerIds.length - 1 && !abortRef.current) {
-        await new Promise((r) => setTimeout(r, 700))
+      // Configurable delay between requests
+      if (i < playerIds.length - 1 && !abortRef.current && effectiveDelay > 0) {
+        await new Promise((r) => setTimeout(r, effectiveDelay))
       }
     }
 
@@ -316,14 +357,90 @@ export function GiftCodeRedeemer() {
             </div>
           )}
 
+          {/* Speed Control */}
+          <div className="space-y-3">
+            <Label className="flex items-center gap-2 text-sm font-medium">
+              <Gauge className="h-4 w-4 text-primary" />
+              Vitesse de récupération
+            </Label>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {SPEED_PRESETS.map((preset) => {
+                const isActive = customDelay === null && speedId === preset.id
+                return (
+                  <Button
+                    key={preset.id}
+                    variant={isActive ? "default" : "outline"}
+                    onClick={() => {
+                      setSpeedId(preset.id)
+                      setCustomDelay(null)
+                    }}
+                    disabled={isRunning}
+                    className={cn(
+                      "flex h-auto flex-col gap-1 py-2",
+                      isActive && "border-primary"
+                    )}
+                  >
+                    <span className="text-xs font-semibold">{preset.label}</span>
+                    <span className="font-mono text-[10px] opacity-70">
+                      {preset.delay}ms
+                    </span>
+                  </Button>
+                )
+              })}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {customDelay !== null
+                ? "Délai personnalisé actif"
+                : activeSpeed.description}
+            </p>
+
+            {/* Custom Delay */}
+            <div className="space-y-2">
+              <Label
+                htmlFor="customDelay"
+                className="text-xs text-muted-foreground"
+              >
+                Délai personnalisé entre requêtes (ms)
+              </Label>
+              <Input
+                id="customDelay"
+                type="number"
+                min={0}
+                step={50}
+                placeholder="Ex: 500 (laisser vide pour utiliser un preset)"
+                value={customDelay ?? ""}
+                onChange={(e) => {
+                  const v = e.target.value
+                  setCustomDelay(v === "" ? null : Math.max(0, parseInt(v, 10) || 0))
+                }}
+                className="border-border/50 bg-background/50 font-mono"
+                disabled={isRunning}
+              />
+            </div>
+          </div>
+
           {/* Player Count Info */}
-          <div className="rounded-lg border border-border/30 bg-background/30 p-3">
+          <div className="space-y-2 rounded-lg border border-border/30 bg-background/30 p-3">
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">Joueurs sélectionnés</span>
               <Badge variant="secondary" className="font-mono">
                 {playerIds.length}
               </Badge>
             </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-muted-foreground">Délai / tentatives</span>
+              <Badge variant="secondary" className="font-mono">
+                {effectiveDelay}ms · {activeSpeed.retries}x
+              </Badge>
+            </div>
+            {playerIds.length > 0 && (
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Durée estimée min.</span>
+                <Badge variant="secondary" className="font-mono">
+                  ~{Math.max(0, Math.round((playerIds.length - 1) * effectiveDelay / 1000))}s
+                </Badge>
+              </div>
+            )}
           </div>
 
           {/* Action Buttons */}

@@ -8,7 +8,8 @@ import { Frakinator } from "@/components/frakinator"
 import { RatioCalculator } from "@/components/ratio-calculator"
 import { BuffDebuffCalculator } from "@/components/buff-debuff-calculator"
 import { GiftCodeRedeemer } from "@/components/gift-code-redeemer"
-import { Package, Sparkles, Swords, Target, TrendingUp, Gift } from "lucide-react"
+import { GatherTimeCalculator } from "@/components/gather-time-calculator"
+import { Package, Sparkles, Swords, Target, TrendingUp, Gift, Timer } from "lucide-react"
 
 const TABS = [
   { id: "rss", label: "Coffres RSS", icon: Package },
@@ -16,6 +17,7 @@ const TABS = [
   { id: "fraki", label: "Frakinator", icon: Swords },
   { id: "ratio", label: "Ratio Marche", icon: Target },
   { id: "buff", label: "Buff/Debuff", icon: TrendingUp },
+  { id: "gather", label: "Temps Collecte", icon: Timer },
   { id: "giftcode", label: "Codes Cadeaux", icon: Gift },
 ] as const
 
@@ -61,6 +63,7 @@ export default function KingshotHub() {
             {activeTab === "fraki" && "Frakinator System"}
             {activeTab === "ratio" && "Ratio de Marche"}
             {activeTab === "buff" && "Calculateur Buff/Debuff"}
+            {activeTab === "gather" && "Temps de Collecte"}
             {activeTab === "giftcode" && "Codes Cadeaux"}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -70,6 +73,7 @@ export default function KingshotHub() {
               "Trouvez la composition optimale de troupes"}
             {activeTab === "ratio" && "Répartissez vos troupes efficacement"}
             {activeTab === "buff" && "Calculez vos statistiques après modificateur"}
+            {activeTab === "gather" && "Calculez la durée et l'heure de vos collectes"}
             {activeTab === "giftcode" && "Récupérez vos récompenses automatiquement"}
           </p>
         </header>
@@ -81,6 +85,7 @@ export default function KingshotHub() {
           {activeTab === "fraki" && <Frakinator />}
           {activeTab === "ratio" && <RatioCalculator />}
           {activeTab === "buff" && <BuffDebuffCalculator />}
+          {activeTab === "gather" && <GatherTimeCalculator />}
           {activeTab === "giftcode" && <GiftCodeRedeemer />}
         </main>
 
